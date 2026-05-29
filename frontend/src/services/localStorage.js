@@ -1,5 +1,5 @@
-const ACCESS_KEY="accessToken",
-const REFRESH_KEY="refreshToken",
+const ACCESS_KEY="accessToken";
+const REFRESH_KEY="refreshToken";
 const USER_KEY="user"
 
 const tokenStorage={

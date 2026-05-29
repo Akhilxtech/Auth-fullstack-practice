@@ -15,8 +15,6 @@ export const Register = () => {
     async function submit(data){
         try {
             await authService.register(data);
-            console.log("register Success");
-            
         } catch (error) {
             const message=error.response?.data?.message || "Registration failed";
             setServerError(message)

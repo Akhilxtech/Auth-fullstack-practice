@@ -12,7 +12,6 @@ function Page() {
   async function getProfile(){
     try {
       const data=await authService.profile();
-      console.log("profile fetch successfully...",data);
       setProfileData(data)
       setMe(true)
       setProfileError("")
@@ -27,7 +26,6 @@ function Page() {
   async function logout(){
     try {
       await authService.logout();
-      console.log("logout success");
       setLogoutSuccess(true)
       setTimeout(() => {
        navigate({to:"/login"})

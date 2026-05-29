@@ -17,7 +17,6 @@ export const Login= () => {
    async function submit(data){
         try {
             await authService.login(data);
-            console.log("login Success");
 
             navigate({to: "/page"})
             

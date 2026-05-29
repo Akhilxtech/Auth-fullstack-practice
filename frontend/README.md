@@ -1,16 +1,109 @@
-# React + Vite
+# AuthFlow Console
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack authentication system with JWT-based login, registration, and token refresh — deployed with custom domains.
 
-Currently, two official plugins are available:
+🌐 **Live:** [auth.akhilt.tech](https://auth.akhilt.tech)
+🔌 **API:** [api.akhilt.tech](https://api.akhilt.tech)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Frontend**
+- React + Vite
+- Axios with request/response interceptors
+- Deployed on Netlify
 
-## Expanding the ESLint configuration
+**Backend**
+- Node.js + Express
+- JWT (access + refresh token)
+- bcryptjs for password hashing
+- better-sqlite3
+- Deployed on Render
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Features
+
+- User registration and login
+- JWT access token + refresh token flow
+- Automatic token refresh via Axios interceptor
+- Protected routes
+- CORS configured for production
+
+---
+
+## Project Structure
+
+```
+├── frontend/
+│   ├── src/
+│   │   ├── api/          # Axios instance + interceptors
+│   │   ├── components/
+│   │   └── pages/
+│   └── .env
+│
+└── backend/
+    ├── controllers/
+    ├── routes/
+    ├── middleware/
+    ├── db.js
+    └── server.js
+```
+
+---
+
+## Local Setup
+
+**Backend**
+```bash
+cd backend
+pnpm install
+cp .env.example .env   # fill in your values
+pnpm dev
+```
+
+**Frontend**
+```bash
+cd frontend
+pnpm install
+cp .env.example .env   # set VITE_API_URL=http://localhost:3000
+pnpm dev
+```
+
+**Environment Variables**
+
+Backend `.env`:
+```
+PORT=3000
+JWT_SECRET=your_secret_here
+JWT_REFRESH_SECRET=your_refresh_secret_here
+```
+
+Frontend `.env`:
+```
+VITE_API_URL=https://api.akhilt.tech
+```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register new user |
+| POST | `/api/auth/login` | Login, returns tokens |
+| POST | `/api/auth/refresh` | Get new access token |
+| POST | `/api/auth/logout` | Logout user |
+| GET | `/api/auth/me` | Get current user (protected) |
+
+---
+
+## Deployment
+
+| Service | Platform | Domain |
+|---------|----------|--------|
+| Frontend | Netlify | auth.akhilt.tech |
+| Backend | Render | api.akhilt.tech |
+
+DNS managed via Netlify — CNAME records pointing to respective platforms.
